@@ -25,10 +25,25 @@
 #################
 # CONFIGURATION #
 #################
+# Note: I'll assume that vbox-control.sh is located in the same folder. If that's not the case, please correct this bellow.
+vbox_control=`pwd`"/vbox-control.sh"
 
 # Set debug to 1 if you want to see the output.
 debug=0
 
+# So far, I've named all my snapshots to the same name. If you need to restore each
+# virtualmachine to a different named snapshot, please submit a pull request: you're my
+# guest.
+snapshot="estado-inicial"
+
+# Now name all the virtualmachines you'll need to revert to the snapshot every time you execute 
+# this script. Please try to maintain the array integrity: while bash doesn't care about gaps in
+# the array, you can be driven crazy if something goes wrong.
+virtualMachines[0]="ubuntu_32bits"
+virtualMachines[1]="win7_32bits"
+virtualMachines[2]="win7_64bits"
+virtualMachines[3]="WinXP_IE7"
+virtualMachines[4]="WinXP_IE8"
 
 ##########################
 ####### THAT'S IT ########
@@ -36,8 +51,17 @@ debug=0
 # P.S.: really. Just go down below if you really know what
 # you're doing.
 
+function restore() {
+	$vbox_control shutdown $1 $redirect
+    $vbox_control revert $1 $2 $redirect
+	$vbox_control start $1 $redirect
+}
+
 redirect="> /dev/null 2>&1"
 if [ $debug -eq 1 ]; then
 	redirect=""
 fi
 
+for virtualmachine in ${virtualMachines[@]}; do
+	restore $virtualmachine $snapshot
+done
