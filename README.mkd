@@ -9,10 +9,11 @@ freedom to screw up my VMs as much as I want, with the security that tomorrow ev
 is gonna be allright.
 
 The solution: A quick-and-dirty shell script to interface with VBoxManage. In depth:
-    $ vbox-control.sh: this guy handles all the hassle of dealing with VBoxManage.
-    VBoxManage is a little pain in the a\*\* and I need to have an easy way of dealing with it
-    $ vbox-snapshot-restore.sh: this guy does all the magic, and goes to the crontab to be invoked
-    every day. Here, you can choose which virtualmachines you'll need to restore, and to which 
-    snapshot.
+* $ vbox-control.sh: this guy handles all the hassle of dealing with VBoxManage.
+VBoxManage is a little pain in the a\*\* and I need to have an easy way of dealing with it
+
+* $ vbox-snapshot-restore.sh: this guy does all the magic, and goes to the crontab to be invoked
+every day. Here, you can choose which virtualmachines you'll need to restore, and to which 
+snapshot.
 
 That's it. It's free to use, distribute and change. GNU/GPL v2 or higher.
