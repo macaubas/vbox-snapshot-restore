@@ -53,7 +53,7 @@ virtualMachines[4]="WinXP_IE8"
 
 function restore() {
 	$vbox_control shutdown $1 $redirect
-    $vbox_control revert $1 $2 $redirect
+	$vbox_control revert $1 $2 $redirect
 	$vbox_control start $1 $redirect
 }
 
