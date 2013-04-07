@@ -73,12 +73,7 @@ function validateEntry() {
 # Function to count the quantity of parameters passed
 # Returns exactly this
 function countParams() {
-	params=$*
-	index=0
-	for param in $params; do
-		let "index+=1"
-	done
-	return $index
+	return $# 
 }
 
 
@@ -120,7 +115,7 @@ function revertSnapshot() {
 	params_expected=2
 	countParams $*
 	qtd_params=$?
-	validateEntry $params_expected $qtd_params	
+	validateEntry $params_expected $qtd_params
 	$vboxmanage snapshot $1 restore $2
 	return 0
 }
